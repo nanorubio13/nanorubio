@@ -41,6 +41,28 @@
     .artwork img {
       max-width: 100%;
       height: auto;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .artwork img:hover {
+      opacity: 0.85;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      box-shadow: 0 0 20px #000;
     }
     footer {
       text-align: center;
@@ -65,24 +87,24 @@
       <h2>Gallery</h2>
       <div class="gallery">
         <div class="artwork">
-          <img src="terror-web.jpg" alt="Terror" />
-          <p><strong>Terror</strong><br />12"x10". Acrylic on canvas</p>
+          <img src="terror-web.jpg" alt="Terror" onclick="openLightbox(this.src)" />
+          <p><strong>Terror</strong><br />12\"x10\". Acrylic on canvas</p>
         </div>
         <div class="artwork">
-          <img src="RGB.jpg" alt="RGB" />
-          <p><strong>RBG</strong><br />5"x7". Acrylic on canvas.</p>
+          <img src="RGB.jpg" alt="RGB" onclick="openLightbox(this.src)" />
+          <p><strong>RBG</strong><br />5\"x7\". Acrylic on canvas.</p>
         </div>
         <div class="artwork">
-          <img src="lai-web.jpg" alt="Lucifer's Accelerated Image" />
-          <p><strong>Lucifer's Accelerated Image</strong><br />12"x8". Acrylic on canvas. 2011</p>
+          <img src="lai-web.jpg" alt="Lucifer's Accelerated Image" onclick="openLightbox(this.src)" />
+          <p><strong>Lucifer's Accelerated Image</strong><br />12\"x8\". Acrylic on canvas. 2011</p>
         </div>
         <div class="artwork">
-          <img src="dashingskipper-web.jpg" alt="Dashing Skipper" />
-          <p><strong>Dashing Skipper</strong><br />16"x20". Acrylic on canvas</p>
+          <img src="dashingskipper-web.jpg" alt="Dashing Skipper" onclick="openLightbox(this.src)" />
+          <p><strong>Dashing Skipper</strong><br />16\"x20\". Acrylic on canvas</p>
         </div>
         <div class="artwork">
-          <img src="Solid State.jpg" alt="Solid State" />
-          <p><strong>Solid State</strong><br />Part of the series "Future". 24"x30". Acrylic on canvas. 2016</p>
+          <img src="Solid State.jpg" alt="Solid State" onclick="openLightbox(this.src)" />
+          <p><strong>Solid State</strong><br />Part of the series \"Future\". 24\"x30\". Acrylic on canvas. 2016</p>
         </div>
       </div>
     </section>
@@ -121,8 +143,22 @@
     </section>
   </div>
 
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Artwork preview" />
+  </div>
+
   <footer>
     &copy; 2025 Nano Rubio. All rights reserved.
   </footer>
+
+  <script>
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
