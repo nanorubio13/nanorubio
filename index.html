@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nano Rubio | Artist Portfolio</title>
 
-  
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-
 
   <style>
     body {
@@ -24,14 +22,13 @@
       text-align: center;
     }
 
-    /* ✅ Moved outside header block */
     header h1 {
-  font-family: 'Anton', sans-serif;
-  font-size: 4rem;
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-}
+      font-family: 'Anton', sans-serif;
+      font-size: 4rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
 
     nav a {
       margin: 0 1rem;
@@ -55,7 +52,6 @@
     .artwork {
       border: 1px solid #fff;
       padding: 0.75rem;
-      font-size: 0.5rem;
       background: #fff;
     }
 
@@ -89,85 +85,37 @@
       box-shadow: 0 0 20px #000;
     }
 
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 1rem;
+      z-index: 1001;
+      user-select: none;
+    }
+
+    #prevBtn {
+      left: 10px;
+    }
+
+    #nextBtn {
+      right: 10px;
+    }
+
     footer {
       text-align: center;
       padding: 2rem 1rem;
       background: #f5f5f5;
       font-size: 0.9rem;
     }
-    .nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 3rem;
-  color: white;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 1rem;
-  z-index: 1001;
-  user-select: none;
-}
-
-#prevBtn {
-  left: 10px;
-}
-
-#nextBtn {
-  right: 10px;
-}
   </style>
 </head>
-<div class="lightbox" id="lightbox">
-  <button id="prevBtn" class="nav-btn" onclick="prevImage()">&#10094;</button>
-  <img id="lightbox-img" src="" alt="Artwork preview" />
-  <button id="nextBtn" class="nav-btn" onclick="nextImage()">&#10095;</button>
-</div>
 
-<script>
-  const images = Array.from(document.querySelectorAll('.artwork img'));
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  let currentIndex = 0;
-
-  images.forEach((img, index) => {
-    img.addEventListener('click', () => {
-      currentIndex = index;
-      showImage();
-    });
-  });
-
-  function showImage() {
-    lightboxImg.src = images[currentIndex].src;
-    lightbox.style.display = 'flex';
-  }
-
-  function closeLightbox() {
-    lightbox.style.display = 'none';
-  }
-
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showImage();
-  }
-
-  function nextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage();
-  }
-
-  // Close on outside click
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  // Close with ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') nextImage();
-    if (e.key === 'ArrowLeft') prevImage();
-  });
-</script>
 <body>
   <header>
     <h1>Nano Rubio</h1>
@@ -183,22 +131,21 @@
       <h2>Gallery</h2>
       <div class="gallery">
         <div class="artwork">
-          <img src="terror-web.jpg" alt="Terror"/>
+          <img src="terror-web.jpg" alt="Terror" />
           <p><strong>Terror</strong><br />12ft x 10ft. Acrylic on canvas</p>
         </div>
         <div class="artwork">
-          <img src="RGB.jpg" alt="RGB"/>
+          <img src="RGB.jpg" alt="RGB" />
           <p><strong>RBG</strong><br />5"x7". Acrylic on canvas.</p>
         </div>
         <div class="artwork">
-          <img src="lai-web.jpg" alt="Lucifer's Accelerated Image"/>
+          <img src="lai-web.jpg" alt="Lucifer's Accelerated Image" />
           <p><strong>Lucifer's Accelerated Image</strong><br />12"x8". Acrylic on canvas. 2011</p>
         </div>
         <div class="artwork">
-          <img src="dashingskipper-web.jpg" alt="Dashing Skipper"/>
+          <img src="dashingskipper-web.jpg" alt="Dashing Skipper" />
           <p><strong>Dashing Skipper</strong><br />16"x20". Acrylic on canvas</p>
         </div>
-        
       </div>
     </section>
 
@@ -225,6 +172,7 @@
       Vectors. 2012. George Lawson Gallery. Culver City, CA<br>
       Endure SUPERMAX. 2011. FAR (Foundation for Art Resources). Long Beach, CA<br>
       Accelerated Grimacing. 2011. DBA256 Gallery. Pomona, CA</p>
+
       <p><strong>References available upon request.</strong></p>
     </section>
 
@@ -236,51 +184,72 @@
     </section>
   </div>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const images = Array.from(document.querySelectorAll('.artwork img'));
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    let currentIndex = 0;
+  <!-- Lightbox viewer -->
+  <div class="lightbox" id="lightbox">
+    <button id="prevBtn" class="nav-btn">&#10094;</button>
+    <img id="lightbox-img" src="" alt="Artwork preview" />
+    <button id="nextBtn" class="nav-btn">&#10095;</button>
+  </div>
 
-    images.forEach((img, index) => {
-      img.addEventListener('click', () => {
-        currentIndex = index;
+  <footer>
+    &copy; 2025 Nano Rubio. All rights reserved.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = Array.from(document.querySelectorAll('.artwork img'));
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      let currentIndex = 0;
+
+      images.forEach((img, index) => {
+        img.addEventListener('click', () => {
+          currentIndex = index;
+          showImage();
+        });
+      });
+
+      function showImage() {
+        lightboxImg.src = images[currentIndex].src;
+        lightbox.style.display = 'flex';
+      }
+
+      function closeLightbox() {
+        lightbox.style.display = 'none';
+      }
+
+      function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
         showImage();
+      }
+
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage();
+      }
+
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevImage();
+      });
+
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextImage();
+      });
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
       });
     });
-
-    function showImage() {
-      lightboxImg.src = images[currentIndex].src;
-      lightbox.style.display = 'flex';
-    }
-
-    function closeLightbox() {
-      lightbox.style.display = 'none';
-    }
-
-    function prevImage() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      showImage();
-    }
-
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage();
-    }
-
-    // Close on outside click
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    // Keyboard controls
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
-    });
-  });
-</script>
+  </script>
 </body>
 </html>
