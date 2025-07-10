@@ -95,8 +95,79 @@
       background: #f5f5f5;
       font-size: 0.9rem;
     }
+    .nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1rem;
+  z-index: 1001;
+  user-select: none;
+}
+
+#prevBtn {
+  left: 10px;
+}
+
+#nextBtn {
+  right: 10px;
+}
   </style>
 </head>
+<div class="lightbox" id="lightbox">
+  <button id="prevBtn" class="nav-btn" onclick="prevImage()">&#10094;</button>
+  <img id="lightbox-img" src="" alt="Artwork preview" />
+  <button id="nextBtn" class="nav-btn" onclick="nextImage()">&#10095;</button>
+</div>
+
+<script>
+  const images = Array.from(document.querySelectorAll('.artwork img'));
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      showImage();
+    });
+  });
+
+  function showImage() {
+    lightboxImg.src = images[currentIndex].src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage();
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage();
+  }
+
+  // Close on outside click
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Close with ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+</script>
 <body>
   <header>
     <h1>Nano Rubio</h1>
